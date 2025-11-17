@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Smart Valet Mobile Interactive Mock</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #f7faff;
+    margin: 0; padding-bottom: 60px;
+  }
+  .container {
+    max-width: 390px;
+    margin: auto;
+    padding: 16px 12px 90px;
+  }
+  .header {
+    background: #1a237e;
+    color: #fff;
+    text-align: center;
+    padding: 24px 0 14px;
+    border-radius: 0 0 20px 20px;
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: 1.5px;
+  }
+  .section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 18px;
+    box-shadow: 0 2px 6px #0002;
+    margin-bottom: 20px;
+    display: none;
+  }
+  .section.active {
+    display: block;
+  }
+  .label {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  input, button, select {
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #bbb;
+    box-sizing: border-box;
+  }
+  button {
+    background: #3949ab;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  button.link-style {
+    background: none;
+    border: none;
+    color: #3949ab;
+    text-decoration: underline;
+    padding: 0;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 12px;
+  }
+  .qrbox {
+    display: flex;
+    justify-content: center;
+    margin: 14px 0;
+  }
+  .qrcode {
+    width: 140px;
+    height: 140px;
+    background: #e3e3ee;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    user-select: none;
+  }
+  .status-msg {
+    font-size: 16px;
+    color: #2c387e;
+    margin: 12px 0;
+    user-select: none;
+  }
+  .ticket-detail {
+    margin: 8px 0;
+  }
+  .delivered {
+    color: #009933;
+  }
+  .driver-sec {
+    background: #e8eaf6;
+    padding: 16px;
+    border-radius: 10px;
+  }
+  .footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 56px;
+    background: #1a237e;
+    color: #fff;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 2px solid #3949ab;
+  }
+  .footer div {
+    cursor: pointer;
+  }
+  .footer .active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">Smart Valet</div>
+
+  <!-- Login Screen -->
+  <div class="section active" id="screen-login">
+    <div class="label">Login with Mobile</div>
+    <input type="tel" id="login-mobile" placeholder="Enter Your Mobile Number" maxlength="10" />
+    <button onclick="sendOtp()">Send OTP</button>
+    <input type="number" id="login-otp" placeholder="Enter OTP" maxlength="6" style="margin-top:14px;"/>
+    <button onclick="verifyOtp()">Verify & Continue</button>
+  </div>
+
+  <!-- Role Choose Screen -->
+  <div class="section" id="screen-role-select">
+    <div class="label">Select Your Role</div>
+    <button onclick="chooseRole('customer')">Customer</button>
+    <button onclick="chooseRole('driver')" style="margin-top: 12px;">Valet Driver</button>
+  </div>
+
+  <!-- Customer Flow -->
+
+  <!-- Car Drop-Off not shown in customer -->
+
+  <!-- Customer Ticket View -->
+  <div class="section" id="screen-customer-ticket">
+    <div class="label">Your Valet Ticket</div>
+    <div class="ticket-detail"><b>Car:</b> AP09AB1229</div>
+    <div class="ticket-detail"><b>Zone:</b> A</div>
+    <div class="ticket-detail" id="customer-status"><b>Status:</b> Parked</div>
+    <div class="qrbox">
+      <div class="qrcode">QR</div>
+    </div>
+    <div class="status-msg">Show this QR at pickup</div>
+    <button class="link-style" onclick="goToRequestCar()">Request My Car</button>
+  </div>
+
+  <!-- Request Car -->
+  <div class="section" id="screen-customer-request">
+    <div class="label">Request Car Retrieval</div>
+    <p>Click the button below to request your car. The driver will be notified immediately.</p>
+    <button onclick="requestCar()">Request My Car</button>
+  </div>
+
+  <!-- Request Status -->
+  <div class="section" id="screen-customer-status">
+    <div class="label">Car Retrieval Status</div>
+    <div class="status-msg" id="car-status-msg">Request received. Your car will be brought from parking soon.</div>
+    <div class="ticket-detail"><b>Status:</b> In Transit</div>
+    <div class="ticket-detail"><b>Driver:</b> Krishna (ID: 204)</div>
+    <div class="status-msg">You will get a WhatsApp message when the car is en route and when it arrives at the lobby.</div>
+  </div>
+
+  <!-- Pickup Confirmation -->
+  <div class="section" id="screen-customer-pickup">
+    <div class="label">Your Car is Ready</div>
+    <div class="status-msg delivered"><b>Arrived at Lobby</b></div>
+    <div class="qrbox">
+      <div class="qrcode">QR</div>
+    </div>
+    <div class="status-msg">Please show this QR for handover</div>
+    <button onclick="confirmPickup()">Mark as Received</button>
+  </div>
+
+  <!-- Driver Flow -->
+
+  <!-- Driver Car Drop-off -->
+  <div class="section" id="screen-driver-dropoff">
+    <div class="label">Car Drop-off</div>
+    <input type="text" id="dropoff-customer-mobile" placeholder="Customer Mobile Number"/>
+    <input type="text" id="dropoff-car-number" placeholder="Car Number (e.g. AP09AB1229)"/>
+    <select id="dropoff-zone">
+      <option value="">Select Parking Zone</option>
+      <option value="Zone A">Zone A</option>
+      <option value="Zone B">Zone B</option>
+      <option value="Zone C">Zone C</option>
+    </select>
+    <button onclick="checkInCar()">Check-in & Generate Ticket</button>
+  </div>
+
+  <!-- Driver Queue & Actions -->
+  <div class="section" id="screen-driver-queue">
+    <div class="label">Driver Queue (Next Action)</div>
+    <div><b>1.</b> AP09AB1229 - Fetch from Zone A</div>
+    <div><b>2.</b> TS08DD3290 - Fetch from Zone C</div>
+    <button onclick="startDelivery()">Start Car Delivery</button>
+    <button onclick="markArrived()">Mark Arrived at Lobby</button>
+    <button onclick="scanQr()">Scan QR for Handover</button>
+    <div class="status-msg">Next customer notified via WhatsApp</div>
+  </div>
+
+  <!-- Pickup Confirmation Driver -->
+  <div class="section" id="screen-driver-confirm">
+    <div class="label">Car Delivered Successfully</div>
+    <button onclick="backToQueue()">Back to Queue</button>
+  </div>
+</div>
+
+<div class="footer">
+  <div id="btn-customer" class="active" onclick="changeRoleView('customer')">Customer Flow</div>
+  <div id="btn-driver" onclick="changeRoleView('driver')">Driver Flow</div>
+</div>
+
+<script>
+  let currentRole = null;
+  let currentScreen = "screen-login";
+
+  function showScreen(id) {
+    const sections = document.querySelectorAll(".section");
+    sections.forEach(sec => {
+      sec.classList.remove("active");
+    });
+    const screen = document.getElementById(id);
+    if(screen) screen.classList.add("active");
+    currentScreen = id;
+  }
+
+  function sendOtp() {
+    const mobile = document.getElementById("login-mobile").value;
+    if(mobile.length < 10) {
+      alert("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+    alert("OTP sent to " + mobile);
+  }
+
+  function verifyOtp() {
+    const otp = document.getElementById("login-otp").value;
+    if(otp.length < 4) {
+      alert("Please enter the OTP.");
+      return;
+    }
+    showScreen("screen-role-select");
+  }
+
+  function chooseRole(role) {
+    currentRole = role;
+    if(role === "customer") {
+      showScreen("screen-customer-ticket");
+      setActiveFooter('customer');
+    } else {
+      showScreen("screen-driver-dropoff");
+      setActiveFooter('driver');
+    }
+  }
+
+  function goToRequestCar() {
+    showScreen("screen-customer-request");
+  }
+
+  function requestCar() {
+    alert("Car request sent! You will receive updates shortly.");
+    showScreen("screen-customer-status");
+  }
+
+  function confirmPickup() {
+    alert("Thank you! Enjoy your ride.");
+    showScreen("screen-customer-ticket");
+  }
+
+  // Driver Actions
+
+  function checkInCar() {
+    let mobile = document.getElementById("dropoff-customer-mobile").value;
+    let carNum = document.getElementById("dropoff-car-number").value;
+    let zone = document.getElementById("dropoff-zone").value;
+
+    if(!mobile || mobile.length!=10) {
+      alert("Enter valid customer mobile");
+      return;
+    }
+    if(!carNum) {
+      alert("Enter car number");
+      return;
+    }
+    if(!zone) {
+      alert("Select parking zone");
+      return;
+    }
+
+    alert(`Checked in car ${carNum} in ${zone} for customer ${mobile}`);
+    // Move to Driver Queue for demo
+    showScreen("screen-driver-queue");
+  }
+
+  function startDelivery() {
+    alert("Started car delivery.");
+  }
+  function markArrived() {
+    alert("Marked as arrived at lobby.");
+  }
+  function scanQr() {
+    alert("QR scanned. Handover confirmed.");
+    showScreen("screen-driver-confirm");
+  }
+  function backToQueue() {
+    showScreen("screen-driver-queue");
+  }
+
+  function changeRoleView(role) {
+    currentRole = role;
+    if(role === "customer") {
+      showScreen("screen-customer-ticket");
+      setActiveFooter('customer');
+    } else {
+      showScreen("screen-driver-dropoff");
+      setActiveFooter('driver');
+    }
+  }
+
+  function setActiveFooter(role) {
+    document.getElementById('btn-customer').classList.remove('active');
+    document.getElementById('btn-driver').classList.remove('active');
+    if(role === 'customer') document.getElementById('btn-customer').classList.add('active');
+    else document.getElementById('btn-driver').classList.add('active');
+  }
+</script>
+</body>
+</html>
