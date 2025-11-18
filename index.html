@@ -1,343 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Smart Valet Mobile Interactive Mock</title>
-<style>
-  body {
-    font-family: sans-serif;
-    background: #f7faff;
-    margin: 0; padding-bottom: 60px;
-  }
-  .container {
-    max-width: 390px;
-    margin: auto;
-    padding: 16px 12px 90px;
-  }
-  .header {
-    background: #1a237e;
-    color: #fff;
-    text-align: center;
-    padding: 24px 0 14px;
-    border-radius: 0 0 20px 20px;
-    font-weight: bold;
-    font-size: 22px;
-    letter-spacing: 1.5px;
-  }
-  .section {
-    background: #fff;
-    border-radius: 14px;
-    padding: 20px 18px;
-    box-shadow: 0 2px 6px #0002;
-    margin-bottom: 20px;
-    display: none;
-  }
-  .section.active {
-    display: block;
-  }
-  .label {
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
-  input, button, select {
-    width: 100%;
-    margin-top: 8px;
-    padding: 12px 10px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #bbb;
-    box-sizing: border-box;
-  }
-  button {
-    background: #3949ab;
-    color: #fff;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  button.link-style {
-    background: none;
-    border: none;
-    color: #3949ab;
-    text-decoration: underline;
-    padding: 0;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 12px;
-  }
-  .qrbox {
-    display: flex;
-    justify-content: center;
-    margin: 14px 0;
-  }
-  .qrcode {
-    width: 140px;
-    height: 140px;
-    background: #e3e3ee;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 56px;
-    user-select: none;
-  }
-  .status-msg {
-    font-size: 16px;
-    color: #2c387e;
-    margin: 12px 0;
-    user-select: none;
-  }
-  .ticket-detail {
-    margin: 8px 0;
-  }
-  .delivered {
-    color: #009933;
-  }
-  .driver-sec {
-    background: #e8eaf6;
-    padding: 16px;
-    border-radius: 10px;
-  }
-  .footer {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    height: 56px;
-    background: #1a237e;
-    color: #fff;
-    font-size: 17px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    border-top: 2px solid #3949ab;
-  }
-  .footer div {
-    cursor: pointer;
-  }
-  .footer .active {
-    font-weight: bold;
-    text-decoration: underline;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ctrlarc.com: Innovative software products for enterprise control and automation.">
+    <title>ctrlarc.com | Software Solutions for Control & Automation</title>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" href="/favicon.ico">
+    <meta name="keywords" content="software, product, control, automation, enterprise, Visakhapatnam, support, services">
+
+    <style>
+        :root {
+            --primary-color: #007bff; /* A nice blue for the brand */
+            --secondary-color: #6c757d; /* Gray for subtle elements */
+            --light-bg: #f8f9fa;
+            --dark-text: #212529;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark-text);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Navigation Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+        }
+        /* CTA Button Style */
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+        /* Section Styles */
+        section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        #hero {
+            background-color: var(--light-bg);
+            padding: 100px 20px;
+        }
+        .features-grid, .support-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .feature-item, .service-item {
+            width: 30%;
+            margin: 15px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: left;
+        }
+        #support-services {
+            background-color: var(--light-bg);
+        }
+        #contact {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark-text);
+            color: white;
+            padding: 20px 0;
+            font-size: 0.9em;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+        .footer-section h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .footer-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-content ul li a {
+            color: white;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        /* Responsiveness (Basic) */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 15px;
+            }
+            nav ul li {
+                margin: 0 10px;
+            }
+            .feature-item, .service-item {
+                width: 100%; /* Stack on mobile */
+            }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-section {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="header">Smart Valet</div>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#hero" class="logo">ctrlarc.com</a>
+                <ul>
+                    <li><a href="#features">Product</a></li>
+                    <li><a href="#support-services">Support</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact" class="cta-button">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Login Screen -->
-  <div class="section active" id="screen-login">
-    <div class="label">Login with Mobile</div>
-    <input type="tel" id="login-mobile" placeholder="Enter Your Mobile Number" maxlength="10" />
-    <button onclick="sendOtp()">Send OTP</button>
-    <input type="number" id="login-otp" placeholder="Enter OTP" maxlength="6" style="margin-top:14px;"/>
-    <button onclick="verifyOtp()">Verify & Continue</button>
-  </div>
+    <section id="hero">
+        <div class="container">
+            <h1>Unlock Enterprise Efficiency with <b>ctrlarc</b> Software</h1>
+            <p>Your product-based partner for next-generation <b>Control and Automation</b> solutions in the software industry.</p>
+            
+            <a href="#features" class="cta-button" style="margin-top: 20px;">Explore Our Solutions</a>
+        </div>
+    </section>
 
-  <!-- Role Choose Screen -->
-  <div class="section" id="screen-role-select">
-    <div class="label">Select Your Role</div>
-    <button onclick="chooseRole('customer')">Customer</button>
-    <button onclick="chooseRole('driver')" style="margin-top: 12px;">Valet Driver</button>
-  </div>
+    <hr>
 
-  <!-- Customer Flow -->
+    <section id="features">
+        <div class="container">
+            <h2>Core Product Features</h2>
+            <p>Powerful tools designed to simplify complex systems and maximize operational control.</p>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>&#9881; Real-time Monitoring</h3>
+                    <p>Gain instant visibility into your entire operation with a centralized, dynamic dashboard.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>&#128295; Automated Workflows</h3>
+                    <p>Automate repetitive tasks and reduce human error with intelligent, configurable workflows.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>&#128274; Secure & Scalable</h3>
+                    <p>Built with enterprise-grade security and designed to grow seamlessly with your business needs.</p>
+                </div>
+            </div>
+            <a href="product-details.html" class="cta-button" style="margin-top: 40px;">Request a Demo</a>
+        </div>
+    </section>
 
-  <!-- Car Drop-Off not shown in customer -->
+    <hr>
 
-  <!-- Customer Ticket View -->
-  <div class="section" id="screen-customer-ticket">
-    <div class="label">Your Valet Ticket</div>
-    <div class="ticket-detail"><b>Car:</b> AP09AB1229</div>
-    <div class="ticket-detail"><b>Zone:</b> A</div>
-    <div class="ticket-detail" id="customer-status"><b>Status:</b> Parked</div>
-    <div class="qrbox">
-      <div class="qrcode">QR</div>
-    </div>
-    <div class="status-msg">Show this QR at pickup</div>
-    <button class="link-style" onclick="goToRequestCar()">Request My Car</button>
-  </div>
+    <section id="support-services">
+        <div class="container">
+            <h2>Dedicated Support & Expert Services</h2>
+            <p>Beyond the product, we ensure your success with comprehensive support and tailored services.</p>
+            <div class="support-grid">
+                <div class="service-item">
+                    <h3>24/7 Technical Support</h3>
+                    <p>Get immediate help from our expert technical team, available around the clock for any urgent issues.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Custom Integration Services</h3>
+                    <p>Our engineers will help seamlessly integrate ctrlarc into your existing infrastructure and systems.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Training & Consultation</h3>
+                    <p>In-depth training sessions and strategic consulting to help your team master the platform and optimize its use.</p>
+                </div>
+            </div>
+            <a href="support-page.html" class="cta-button" style="margin-top: 40px;">View Support Plans</a>
+        </div>
+    </section>
 
-  <!-- Request Car -->
-  <div class="section" id="screen-customer-request">
-    <div class="label">Request Car Retrieval</div>
-    <p>Click the button below to request your car. The driver will be notified immediately.</p>
-    <button onclick="requestCar()">Request My Car</button>
-  </div>
+    <hr>
 
-  <!-- Request Status -->
-  <div class="section" id="screen-customer-status">
-    <div class="label">Car Retrieval Status</div>
-    <div class="status-msg" id="car-status-msg">Request received. Your car will be brought from parking soon.</div>
-    <div class="ticket-detail"><b>Status:</b> In Transit</div>
-    <div class="ticket-detail"><b>Driver:</b> Krishna (ID: 204)</div>
-    <div class="status-msg">You will get a WhatsApp message when the car is en route and when it arrives at the lobby.</div>
-  </div>
+    <section id="about">
+        <div class="container">
+            <h2>About <b>ctrlarc</b></h2>
+            <p>Founded in <b>December 2025</b>, ctrlarc.com is committed to building robust and innovative software products. We believe in providing the tools necessary for businesses to achieve ultimate operational control. Our headquarters are located in <b>Visakhapatnam</b>, serving clients globally.</p>
+            <a href="careers.html" style="margin-top: 20px;">Join Our Team</a>
+        </div>
+    </section>
 
-  <!-- Pickup Confirmation -->
-  <div class="section" id="screen-customer-pickup">
-    <div class="label">Your Car is Ready</div>
-    <div class="status-msg delivered"><b>Arrived at Lobby</b></div>
-    <div class="qrbox">
-      <div class="qrcode">QR</div>
-    </div>
-    <div class="status-msg">Please show this QR for handover</div>
-    <button onclick="confirmPickup()">Mark as Received</button>
-  </div>
+    <hr>
 
-  <!-- Driver Flow -->
+    <section id="testimonials" style="background-color: var(--primary-color); color: white;">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <blockquote style="max-width: 600px; margin: 30px auto; font-size: 1.2em;">
+                "The seamless integration and responsive support from ctrlarc.com transformed our workflow. Highly recommend for any serious enterprise."
+                <footer>— <b>R. Sastry</b>, CTO, TechCorp</footer>
+            </blockquote>
+        </div>
+    </section>
 
-  <!-- Driver Car Drop-off -->
-  <div class="section" id="screen-driver-dropoff">
-    <div class="label">Car Drop-off</div>
-    <input type="text" id="dropoff-customer-mobile" placeholder="Customer Mobile Number"/>
-    <input type="text" id="dropoff-car-number" placeholder="Car Number (e.g. AP09AB1229)"/>
-    <select id="dropoff-zone">
-      <option value="">Select Parking Zone</option>
-      <option value="Zone A">Zone A</option>
-      <option value="Zone B">Zone B</option>
-      <option value="Zone C">Zone C</option>
-    </select>
-    <button onclick="checkInCar()">Check-in & Generate Ticket</button>
-  </div>
+    <section id="contact">
+        <div class="container">
+            <h2>Ready to Take Control?</h2>
+            <p>Contact our sales team today to discuss your needs and see a live demonstration.</p>
+            <p style="font-size: 1.5em; margin: 20px 0;">&#9742; <b>+91 9849838116</b></p>
+            <a href="mailto:info@ctrlarc.com" class="cta-button" style="background-color: white; color: var(--primary-color);">Email Us</a>
+            <p style="margin-top: 15px;">Or fill out our brief contact form <a href="contact-form.html" style="color: lightgray;">here</a>.</p>
+        </div>
+    </section>
 
-  <!-- Driver Queue & Actions -->
-  <div class="section" id="screen-driver-queue">
-    <div class="label">Driver Queue (Next Action)</div>
-    <div><b>1.</b> AP09AB1229 - Fetch from Zone A</div>
-    <div><b>2.</b> TS08DD3290 - Fetch from Zone C</div>
-    <button onclick="startDelivery()">Start Car Delivery</button>
-    <button onclick="markArrived()">Mark Arrived at Lobby</button>
-    <button onclick="scanQr()">Scan QR for Handover</button>
-    <div class="status-msg">Next customer notified via WhatsApp</div>
-  </div>
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>Contact Details</h4>
+                <ul>
+                    <li><b>Phone:</b> +91 9849838116</li>
+                    <li><b>Email:</b> info@ctrlarc.com</li>
+                    <li><b>Address:</b> Visakhapatnam, India</li>
+                    <li><b>DOI:</b> December 2025</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Social</h4>
+                <ul>
+                    <li><a href="#" target="_blank">LinkedIn</a></li>
+                    <li><a href="#" target="_blank">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container" style="text-align: center; margin-top: 20px; border-top: 1px solid #444; padding-top: 10px;">
+            &copy; 2025 ctrlarc.com. All rights reserved.
+        </div>
+    </footer>
 
-  <!-- Pickup Confirmation Driver -->
-  <div class="section" id="screen-driver-confirm">
-    <div class="label">Car Delivered Successfully</div>
-    <button onclick="backToQueue()">Back to Queue</button>
-  </div>
-</div>
-
-<div class="footer">
-  <div id="btn-customer" class="active" onclick="changeRoleView('customer')">Customer Flow</div>
-  <div id="btn-driver" onclick="changeRoleView('driver')">Driver Flow</div>
-</div>
-
-<script>
-  let currentRole = null;
-  let currentScreen = "screen-login";
-
-  function showScreen(id) {
-    const sections = document.querySelectorAll(".section");
-    sections.forEach(sec => {
-      sec.classList.remove("active");
-    });
-    const screen = document.getElementById(id);
-    if(screen) screen.classList.add("active");
-    currentScreen = id;
-  }
-
-  function sendOtp() {
-    const mobile = document.getElementById("login-mobile").value;
-    if(mobile.length < 10) {
-      alert("Please enter a valid 10-digit mobile number.");
-      return;
-    }
-    alert("OTP sent to " + mobile);
-  }
-
-  function verifyOtp() {
-    const otp = document.getElementById("login-otp").value;
-    if(otp.length < 4) {
-      alert("Please enter the OTP.");
-      return;
-    }
-    showScreen("screen-role-select");
-  }
-
-  function chooseRole(role) {
-    currentRole = role;
-    if(role === "customer") {
-      showScreen("screen-customer-ticket");
-      setActiveFooter('customer');
-    } else {
-      showScreen("screen-driver-dropoff");
-      setActiveFooter('driver');
-    }
-  }
-
-  function goToRequestCar() {
-    showScreen("screen-customer-request");
-  }
-
-  function requestCar() {
-    alert("Car request sent! You will receive updates shortly.");
-    showScreen("screen-customer-status");
-  }
-
-  function confirmPickup() {
-    alert("Thank you! Enjoy your ride.");
-    showScreen("screen-customer-ticket");
-  }
-
-  // Driver Actions
-
-  function checkInCar() {
-    let mobile = document.getElementById("dropoff-customer-mobile").value;
-    let carNum = document.getElementById("dropoff-car-number").value;
-    let zone = document.getElementById("dropoff-zone").value;
-
-    if(!mobile || mobile.length!=10) {
-      alert("Enter valid customer mobile");
-      return;
-    }
-    if(!carNum) {
-      alert("Enter car number");
-      return;
-    }
-    if(!zone) {
-      alert("Select parking zone");
-      return;
-    }
-
-    alert(`Checked in car ${carNum} in ${zone} for customer ${mobile}`);
-    // Move to Driver Queue for demo
-    showScreen("screen-driver-queue");
-  }
-
-  function startDelivery() {
-    alert("Started car delivery.");
-  }
-  function markArrived() {
-    alert("Marked as arrived at lobby.");
-  }
-  function scanQr() {
-    alert("QR scanned. Handover confirmed.");
-    showScreen("screen-driver-confirm");
-  }
-  function backToQueue() {
-    showScreen("screen-driver-queue");
-  }
-
-  function changeRoleView(role) {
-    currentRole = role;
-    if(role === "customer") {
-      showScreen("screen-customer-ticket");
-      setActiveFooter('customer');
-    } else {
-      showScreen("screen-driver-dropoff");
-      setActiveFooter('driver');
-    }
-  }
-
-  function setActiveFooter(role) {
-    document.getElementById('btn-customer').classList.remove('active');
-    document.getElementById('btn-driver').classList.remove('active');
-    if(role === 'customer') document.getElementById('btn-customer').classList.add('active');
-    else document.getElementById('btn-driver').classList.add('active');
-  }
-</script>
 </body>
 </html>
