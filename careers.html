@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers at ctrlarc.com | Join Our Team</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">ctrlarc.com</a>
+                <ul>
+                    <li><a href="index.html#features">Product</a></li>
+                    <li><a href="support-page.html">Support</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="#application" class="cta-button">Apply Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="careers-hero" style="padding-top: 50px;">
+        <div class="container" style="max-width: 800px;">
+            <h1>Join the <b>ctrlarc</b> Team in Visakhapatnam! 💡</h1>
+            <p style="font-size: 1.2em; color: var(--secondary-color);">We're building the future of enterprise control and automation. We are excited to have you onboard. If you're passionate about innovation, we want to hear from you.</p>
+        </div>
+    </section>
+
+    <section id="application" style="background-color: var(--light-bg); padding: 50px 0;">
+        <div class="container" style="max-width: 650px;">
+            <h2>Submit Your Resume</h2>
+            <p>Please complete the form below to drop your details. We will contact you when a suitable position opens.</p>
+
+            <form action="#" method="POST" enctype="multipart/form-data" style="text-align: left; margin-top: 40px;">
+
+                <div style="margin-bottom: 20px;">
+                    <label for="name" style="display: block; margin-bottom: 5px; font-weight: bold;">Full Name <b>*</b></label>
+                    <input type="text" id="name" name="name" required 
+                           style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">Email Address <b>*</b></label>
+                    <input type="email" id="email" name="email" required 
+                           style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="position" style="display: block; margin-bottom: 5px; font-weight: bold;">Desired Position</label>
+                    <select id="position" name="position"
+                           style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px;">
+                        <option value="">-- Select or Specify --</option>
+                        <option value="software_engineer">Software Engineer</option>
+                        <option value="product_manager">Product Manager</option>
+                        <option value="support_engineer">Support Engineer</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="resume" style="display: block; margin-bottom: 5px; font-weight: bold;">Upload Resume (PDF/DOCX) <b>*</b></label>
+                    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required 
+                           style="width: 100%; padding: 10px 0;">
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <label for="notes" style="display: block; margin-bottom: 5px; font-weight: bold;">Brief Cover Note</label>
+                    <textarea id="notes" name="notes" rows="4" 
+                              placeholder="Tell us why you want to join ctrlarc..."
+                              style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; resize: vertical;"></textarea>
+                </div>
+
+                <button type="submit" class="cta-button" style="width: 100%;">Submit Application</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="text-align: center;">
+            &copy; 2025 ctrlarc.com. All rights reserved. | Visakhapatnam | Call: 9849838116
+        </div>
+    </footer>
+</body>
+</html>
